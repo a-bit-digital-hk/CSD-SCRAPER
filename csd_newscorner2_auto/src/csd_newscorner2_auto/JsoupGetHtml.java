@@ -57,7 +57,8 @@ public class JsoupGetHtml {
         driver.get(url);
 
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            //WebDriverWait wait = new WebDriverWait(driver, 30);
             WebElement cancelButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("isd-closePopup")));
             cancelButton.click();
         } catch (Exception e) {

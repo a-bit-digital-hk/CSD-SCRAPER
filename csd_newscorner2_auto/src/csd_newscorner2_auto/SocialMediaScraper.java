@@ -36,6 +36,7 @@ import java.text.DateFormat;
 
 
 public class SocialMediaScraper {
+    private String Binary;
     private WebDriver driver;
     private int waitSec_;
     private String DEBUG_;
@@ -79,6 +80,7 @@ public class SocialMediaScraper {
         if (!proxyHost.isEmpty() && !proxyPort.isBlank()) {
             options.addArguments("--proxy-server=" + proxyHost + ":" + proxyPort);
         }
+        this.Binary = Binary;
         this.waitSec_ = waitSec;
         this.DEBUG_ = DEBUG;
         this.FacebookBinary_ = FacebookBinary;
@@ -133,6 +135,7 @@ public class SocialMediaScraper {
 
     private void youtubeShortsScraper(final String youtubeShortsUrl) throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
+        options.setBinary(this.Binary);
         if (this.DEBUG_.equals("0")) {
             options.addArguments("--headless=new");
         }
@@ -997,7 +1000,7 @@ public class SocialMediaScraper {
             Thread.sleep(10000);
 
             // Wait for the page to load fully
-            new WebDriverWait(this.driver, 10)
+            new WebDriverWait(this.driver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
             if (this.DEBUG_.equals("1")) {
@@ -1063,7 +1066,7 @@ public class SocialMediaScraper {
             this.driver.get(fbAltScraperAbitUrl);
             Thread.sleep(10000);
 
-            new WebDriverWait(this.driver, 10)
+            new WebDriverWait(this.driver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
             if ("1".equals(this.DEBUG_)) {
@@ -1718,6 +1721,7 @@ public class SocialMediaScraper {
 
         // Set Chrome options to use the default profile
         ChromeOptions options = new ChromeOptions();
+        options.setBinary(this.Binary);
         options.addArguments("user-data-dir=" + UserDataDir_);
         options.addArguments("profile-directory=" + Profile_);
         if (this.DEBUG_.equals("0")) {
@@ -1781,7 +1785,7 @@ public class SocialMediaScraper {
             if (this.DEBUG_.equals("1")) {
                 System.out.println("Starting scraping process...");
             }
-            WebDriverWait wait = new WebDriverWait(driver, 120);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
             if (this.instaCount_ == 0) {
                 if (this.DEBUG_.equals("1")) {
@@ -2010,6 +2014,7 @@ public class SocialMediaScraper {
 
         // Set Chrome options to use the default profile
         ChromeOptions options = new ChromeOptions();
+        options.setBinary(this.Binary);
         options.addArguments("user-data-dir=" + UserDataDir_);
         options.addArguments("profile-directory=" + Profile_);
         if (this.DEBUG_.equals("0")) {
@@ -2028,7 +2033,7 @@ public class SocialMediaScraper {
             this.driver.get(instaReelsUrl);
             Thread.sleep(5000); // Wait for the page to load completely
 
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             int totalPosts = 0; // Counter to track scraped posts
             int divIndex = 1;   // Start with the first div
 
@@ -2255,6 +2260,7 @@ public class SocialMediaScraper {
     private void RssScraper(final String RssUrl, final int RssCount_) throws InterruptedException {
         try {
             ChromeOptions options = new ChromeOptions();
+            options.setBinary(Binary);
             if (this.DEBUG_.equals("0")) {
                 options.addArguments("--headless=new");
             }
@@ -2262,6 +2268,7 @@ public class SocialMediaScraper {
             options.addArguments("--no-sandbox");
 
             this.driver = new ChromeDriver(options);
+
             this.driver.get(RssUrl);
             Thread.sleep(5000);
 
@@ -2408,6 +2415,7 @@ public class SocialMediaScraper {
     public void xmllinkScraper(final String xmllink) {
         try {
             ChromeOptions options = new ChromeOptions();
+            options.setBinary(this.Binary);
             if (this.DEBUG_.equals("0")) {
                 options.addArguments("--headless=new");
             }
