@@ -1,3 +1,0 @@
-Manifest-Version: 1.0 
-Main-Class: csd_newscorner2_auto.main 
-Created-By: 13.0.2 (Oracle Corporation)
